@@ -226,15 +226,15 @@ body{
   }
   :root:not([data-theme="dark"]) .hero-media::after{
     background:
-      linear-gradient(90deg,var(--ink) 0%,rgba(250,244,234,.45) 24%,transparent 58%),
+      linear-gradient(90deg,var(--ink) 0%,rgba(250,244,234,.28) 24%,transparent 58%),
       linear-gradient(0deg,var(--ink) 3%,transparent 28%);
   }
 }
 #hero{position:relative;min-height:100dvh;display:grid;grid-template-columns:1.05fr .95fr;overflow:hidden;isolation:isolate;}
 /* directional stage light from the right, behind the portrait */
 #hero::before{content:"";position:absolute;inset:0;z-index:0;background:
-  radial-gradient(120% 90% at 78% 30%,rgba(var(--orange-rgb),.16),transparent 55%),
-  radial-gradient(80% 70% at 95% 90%,rgba(201,169,110,.08),transparent 60%);
+  radial-gradient(120% 90% at 78% 30%,rgba(var(--orange-rgb),.22),transparent 55%),
+  radial-gradient(80% 70% at 95% 90%,rgba(201,169,110,.12),transparent 60%);
   pointer-events:none;}
 .hero-copy{position:relative;z-index:3;display:flex;flex-direction:column;justify-content:center;padding:8rem var(--gutter) 4rem;}
 .hero-eyebrow{margin-bottom:2rem;}
@@ -317,14 +317,14 @@ body{
   --c:var(--orange);
   position:absolute;inset:0;overflow:hidden;
   background:var(--surface);border:1px solid var(--line);border-radius:6px;
-  display:grid;grid-template-columns:6rem 1fr;gap:clamp(1.4rem,3.5vw,3rem);align-items:center;
+  display:grid;grid-template-columns:6rem 1fr;gap:clamp(1.4rem,3.5vw,3rem);align-items:stretch;
   padding:clamp(1.8rem,4vw,3.4rem);
-  box-shadow:0 -24px 60px rgba(0,0,0,.55);
+  box-shadow:0 -24px 60px rgba(var(--orange-rgb),.35);
   will-change:transform;
 }
 .deck-card .accent{position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c);}
 .deck-index{font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,3.4vw,3rem);line-height:1;color:var(--c);font-variant-numeric:tabular-nums;letter-spacing:-.02em;align-self:start;}
-.deck-main{min-width:0;padding-right:calc(52% + clamp(1.8rem,4vw,3.4rem));}
+.deck-main{min-width:0;position:relative;padding-right:calc(40% + clamp(1.8rem,4vw,3.4rem));display:flex;flex-direction:column;justify-content:center;}
 .deck-kicker{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--c);font-weight:600;margin-bottom:.8rem;}
 .deck-name{font-family:var(--font-display);font-weight:700;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.05;letter-spacing:-.015em;margin-bottom:.9rem;}
 .deck-desc{color:var(--muted);max-width:42ch;font-size:.95rem;}
@@ -332,9 +332,16 @@ body{
 .deck-card:hover .deck-go{color:var(--c);gap:.85rem;}
 .deck-media{
   position:absolute;overflow:hidden;border:1px solid var(--line);border-radius:4px;background:var(--ink);
-  top:clamp(1.8rem,4vw,3.4rem);bottom:clamp(1.8rem,4vw,3.4rem);right:clamp(1.8rem,4vw,3.4rem);width:40%;
+  top:0;bottom:0;right:0;width:40%;
 }
 .deck-media .ph{position:absolute;inset:0;}
+
+/* mobile light mode — brighten the hero bottom fade so it matches the warm paper background */
+@media (max-width:980px){
+  :root:not([data-theme="dark"]) .hero-media::after{
+    background:linear-gradient(0deg,rgba(250,244,234,1) 4%,rgba(250,244,234,.5) 35%,transparent 65%);
+  }
+}
 
 /* reduced-motion / no-JS fallback: plain vertical list, no pin, no animation */
 @media (prefers-reduced-motion:reduce){
@@ -346,7 +353,7 @@ body{
 
 /* ══════════════ 5 · MISSION ══════════════ */
 #mission{position:relative;z-index:2;padding:clamp(6rem,12vw,11rem) 0;overflow:hidden;background:var(--surface);border-top:1px solid var(--line);}
-#mission::before{content:"";position:absolute;left:50%;top:0;width:min(900px,90vw);height:100%;transform:translateX(-50%);background:radial-gradient(60% 50% at 50% 0%,rgba(var(--orange-rgb),.14),transparent 70%);pointer-events:none;}
+#mission::before{content:"";position:absolute;left:50%;top:0;width:min(900px,90vw);height:100%;transform:translateX(-50%);background:radial-gradient(60% 50% at 50% 0%,rgba(var(--orange-rgb),.22),transparent 70%);pointer-events:none;}
 .mission-wrap{position:relative;max-width:880px;margin:0 auto;padding:0 var(--gutter);text-align:center;}
 .mission-eyebrow{justify-content:center;margin-bottom:2.2rem;}
 .mission-eyebrow::before{display:none;}
@@ -401,13 +408,32 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
 .uni-pin::before{
   content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;will-change:transform,opacity;
   background:
-    radial-gradient(ellipse 55% 70% at 22% 52%,rgba(var(--orange-rgb),.08),transparent 64%),
-    radial-gradient(ellipse 42% 55% at 78% 42%,rgba(201,169,110,.055),transparent 64%);
+    radial-gradient(ellipse 55% 70% at 22% 52%,rgba(var(--orange-rgb),.13),transparent 64%),
+    radial-gradient(ellipse 42% 55% at 78% 42%,rgba(201,169,110,.09),transparent 64%);
   animation:uniBreath 9s ease-in-out infinite alternate;
 }
 @keyframes uniBreath{
   0%{transform:scale(1) translate(0,0);opacity:.7;}
   100%{transform:scale(1.09) translate(1.8%,-1.2%);opacity:1;}
+}
+
+/* Universe — halftone dot texture overlay */
+#universe{background:
+  radial-gradient(circle,rgba(var(--orange-rgb),.035) 1.5px,transparent 1.5px) 0 0/32px 32px,
+  linear-gradient(180deg,var(--ink),var(--surface) 55%,var(--ink));}
+
+/* Universe deck — animated orange scan line */
+.uni-deck::before{
+  content:"";position:absolute;left:0;right:0;height:1px;z-index:10;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(var(--orange-rgb),.55) 40%,rgba(var(--orange-rgb),.55) 60%,transparent);
+  box-shadow:0 0 12px 1px rgba(var(--orange-rgb),.3);
+  animation:scanLine 6s ease-in-out infinite;
+}
+@keyframes scanLine{
+  0%{top:0;opacity:0;}
+  8%{opacity:1;}
+  92%{opacity:1;}
+  100%{top:100%;opacity:0;}
 }
 
 /* Universe deck — subtle inner glow shifts with the active card color (via CSS var --c) */
@@ -418,12 +444,7 @@ footer{border-top:1px solid var(--line);background:var(--surface);padding:clamp(
   opacity:0;transition:opacity .6s var(--ease);
 }
 
-/* Mission — radial glow breathes */
-@keyframes missionBreath{
-  0%{transform:translateX(-50%) scale(.96);opacity:.75;}
-  100%{transform:translateX(-50%) scale(1.06);opacity:1;}
-}
-#mission::before{animation:missionBreath 6.5s ease-in-out infinite alternate;}
+/* Mission — static radial glow (no animation) */
 
 /* Stats — hover lift */
 .stat{transition:background .35s var(--ease),transform .35s var(--ease);}
